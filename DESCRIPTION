@@ -1,0 +1,19 @@
+Package: codder
+Title: Type-aware, test-driven data transformation
+Version: 0.1
+Authors@R: person("Peder", "Landsverk", email = "pglandsverk@gmail.com",
+                  role = c("aut", "cre"))
+Description: Write data transformation scripts with a YAML header that
+   explicates assumptions about the raw data, and the result
+   of the transformation. 
+Depends: R (>= 3.1.0)
+License: MIT
+Imports: 
+   magrittr,
+   yaml,
+   readxl,
+   dplyr
+RoxygenNote: 6.1.1
+Suggests: 
+    testthat (>= 2.1.0),
+    dplyr
