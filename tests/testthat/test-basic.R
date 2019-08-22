@@ -24,26 +24,32 @@ function(data){
 }
 '
 writeLines(alterfile,f)
+test_that("can read alter-object", {
+   expect_failure(expect_error({ao <- codder::getAlterObject(f)}))
+})
+
+ao <- codder::getAlterObject(f)
 
 test_that("reading alter stuff", {
-   ao <- codder::getAlterObject(f)
    expect_equal(length(ao),2)
    expect_equal(names(ao),c('header','fun'))
    expect_true(all(c('title','rawSchema','tidySchemata') %in% names(ao$header)))
 })
 
 test_that("succeeds with good data",{
-   ao <- codder::getAlterObject(f)
    gooddat <- data.frame(a = c('a','b','c'), b = c(1,2,3), c = c(4,5,6))
    expect_failure(expect_error({safeTransform(gooddat,ao)}))
 })
 
-test_that("fails with bad data",{
-   ao <- codder::getAlterObject(f)
+test_that("fails with wrong raw types",{
    wrongtypes <- data.frame(a = c('a','b','c'), b = c(1,2,3), c = c(4,5,6))
-   wrongnames <- data.frame(a = factor(c('a','b','c')), e = c(1,2,3), c = c(4,5,6))
-   missescolumn <- data.frame(a = factor(c('a','b','c')), b = c(1,2,3))
    expect_error({safeTransform(wrongtypes,ao)})
+})
+test_that("fails with wrong raw names",{
+   wrongnames <- data.frame(a = factor(c('a','b','c')), e = c(1,2,3), c = c(4,5,6))
    expect_error({safeTransform(wrongnames,ao)})
+})
+test_that("fails with missing columns",{
+   missescolumn <- data.frame(a = factor(c('a','b','c')), b = c(1,2,3))
    expect_error({safeTransform(missescolumn,ao)})
 })
