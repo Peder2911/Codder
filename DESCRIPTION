@@ -1,4 +1,4 @@
-Package: codder
+Package: rigr 
 Title: Type-aware, test-driven data transformation
 Version: 0.1
 Authors@R: person("Peder", "Landsverk", email = "pglandsverk@gmail.com",
@@ -12,7 +12,9 @@ Imports:
    magrittr,
    yaml,
    readxl,
-   dplyr
+   dplyr,
+   tibble,
+   assertthat
 RoxygenNote: 6.1.1
 Suggests: 
     testthat (>= 2.1.0),
